@@ -8,7 +8,6 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
   },
   mode: NODE_ENV ? NODE_ENV : 'development',
-
   entry: path.resolve(__dirname, 'src/index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -19,8 +18,25 @@ module.exports = {
       {
         test: /\.[tj]sx?$/,
         use: ['ts-loader'],
-      }
-    ]
+      },
+      {
+        test: /\.(s*)css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]__[local]__[hash:base64:5]',
+                auto: /\.modules\.\w+$/i,
+              },
+            },
+          },
+          'sass-loader',
+        ],
+      },
+    ],
   },
   plugins: [
     new HTMLWebpackPlugins({
