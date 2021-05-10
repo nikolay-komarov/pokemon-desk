@@ -1,19 +1,25 @@
 {
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
   "name": "pokemon-desk",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:nikolay-komarov/pokemon-desk.git",
   "author": "nikolay-komarov <kny.komarov@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "scripts": {
+    "build:dev": "env NODE_ENV=development webpack --config webpack.config.js",
+    "build:prod": "env NODE_ENV=production webpack --config webpack.config.js",
+    "start": "env NODE_ENV=production webpack-dev-server"
+  },
+    "devDependencies": {
     "html-webpack-plugin": "4.5.0",
     "ts-loader": "8.2.0",
     "typescript": "4.0.3",
     "webpack": "4.44.2",
-    "webpack-cli": "3.3.12"
+    "webpack-cli": "3.3.12",
+    "webpack-dev-server": "3.11.0"
   }
 }
