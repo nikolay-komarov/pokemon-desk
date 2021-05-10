@@ -8,5 +8,12 @@
   "main": "index.js",
   "repository": "git@github.com:nikolay-komarov/pokemon-desk.git",
   "author": "nikolay-komarov <kny.komarov@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "html-webpack-plugin": "4.5.0",
+    "ts-loader": "8.2.0",
+    "typescript": "4.0.3",
+    "webpack": "4.44.2",
+    "webpack-cli": "3.3.12"
+  }
 }
