@@ -54,7 +54,8 @@
     transition: opacity, width ease-in-out 0.25s;
   }
 
-  &:hover {
+  &:hover,
+  &.activeLink {
     &:after {
       width: 100%;
       opacity: 1;
