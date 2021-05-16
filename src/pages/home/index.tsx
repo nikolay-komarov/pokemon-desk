@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../../components/header';
 import Layout from '../../components/layout';
 import Button, { ButtonSize, ButtonColor } from '../../components/button';
+import Parallax from '../../components/parallax';
 
 import s from './home.module.scss';
 
@@ -22,6 +23,9 @@ const HomePage = () => (
           onClick={() => console.log('click')}>
           See Pokemons
         </Button>
+      </div>
+      <div>
+        <Parallax />
       </div>
     </Layout>
   </div>
