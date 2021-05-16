@@ -2,8 +2,9 @@ import React from 'react';
 
 import Header from '../../components/header';
 import Layout from '../../components/layout';
-import Button, { ButtonSize, ButtonColor } from '../../components/button';
+import Button, { ButtonColor, ButtonSize } from '../../components/button';
 import Parallax from '../../components/parallax';
+import Heading, { HeadingSize } from '../../components/heading';
 
 import s from './home.module.scss';
 
@@ -12,10 +13,12 @@ const HomePage = () => (
     <Header />
     <Layout className={s.contentWrap}>
       <div>
-        <h1>
+        <Heading size={HeadingSize.h1}>
           <b>Find</b> all your favorite <b>Pokemon</b>
-        </h1>
-        <p>You can know the type of Pokemon, its strengths, disadvatages and abilities</p>
+        </Heading>
+        <Heading size={HeadingSize.h3}>
+          You can know the type of Pokemon, its strengths, disadvatages and abilities
+        </Heading>
         <Button
           size={ButtonSize.medium}
           color={ButtonColor.green}

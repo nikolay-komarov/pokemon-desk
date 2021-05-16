@@ -20,12 +20,10 @@ interface ButtonProps {
   onClick: (evt: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, size, color, isFullWidth, onClick }) => {
-  return (
-    <button type="button" className={cn(s.root, s[size], s[color], isFullWidth && s.fullWidth)} onClick={onClick}>
-      {children}
-    </button>
-  );
-};
+const Button: React.FC<ButtonProps> = ({ children, size, color, isFullWidth, onClick }) => (
+  <button type="button" className={cn(s.root, s[size], s[color], isFullWidth && s.fullWidth)} onClick={onClick}>
+    {children}
+  </button>
+);
 
 export default Button;
