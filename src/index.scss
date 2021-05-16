@@ -1,4 +1,43 @@
+@font-face {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Karla'), local('Karla-Regular'), url('./fonts/karla-v13-latin-400.woff') format('woff'),
+    url('./fonts/karla-v13-latin-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Karla';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Karla Italic'), local('Karla-Italic'), url('./fonts/karla-v13-latin-italic-400.woff') format('woff'),
+    url('./fonts/karla-v13-latin-italic-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Karla Bold'), local('Karla-Bold'), url('./fonts/karla-v13-latin-700.woff') format('woff'),
+    url('./fonts/karla-v13-latin-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Karla';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Karla Bold Italic'), local('Karla-BoldItalic'),
+    url('./fonts/karla-v13-latin-italic-700.woff') format('woff'),
+    url('./fonts/karla-v13-latin-italic-700.woff2') format('woff2');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
-  min-height: 100vh;
-  background: linear-gradient(180deg, #f5db13 0%, #f2b807 100%);
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Karla', sans-serif;
 }

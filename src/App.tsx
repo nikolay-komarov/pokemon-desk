@@ -1,12 +1,10 @@
 import React from 'react';
-import cn from 'classnames';
+// import cn from 'classnames';
 
-import s from './App.module.scss';
+// import s from './App.module.scss';
 
-const App = () => {
-  console.log(`## some log`);
+import HomePage from './pages/home';
 
-  return <div className={cn(s.header)}>This is App Component</div>;
-};
+const App = () => <HomePage />;
 
 export default App;
