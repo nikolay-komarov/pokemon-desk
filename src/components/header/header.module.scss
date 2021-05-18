@@ -5,27 +5,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  box-shadow: 0 4px 16px rgba(1, 28, 64, 0.2);
 }
 
 .wrap {
   width: 100%;
   max-width: 1125px;
   height: 63px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .pokemonLogo {
-  width: 150px;
+  width: 158px;
   height: 63px;
 }
 
 .menuWrap {
+  width: 100%;
+  max-width: 658px;
+
   display: flex;
   align-items: center;
-  max-width: 650px;
-  width: 100%;
   justify-content: space-between;
 }
 
@@ -33,32 +37,52 @@
   font-style: normal;
   font-weight: normal;
   font-size: 25px;
-  line-height: 20px;
+  line-height: 29px;
   color: $dark;
   text-decoration: none;
   position: relative;
 
   &:after {
     content: '';
+
     display: block;
     position: absolute;
     bottom: -8px;
     height: 1px;
-    width: 100px;
+    width: 1%;
     background: $dark;
     border: 1px solid $dark;
     border-radius: 6px;
     opacity: 0;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translateX(-50%);
     transition: opacity, width ease-in-out 0.25s;
   }
 
-  &:hover,
-  &.activeLink {
+  &:hover {
     &:after {
       width: 100%;
       opacity: 1;
     }
+  }
+}
+
+.activeLink {
+  &:after {
+    content: '';
+
+    display: block;
+    position: absolute;
+    bottom: -8px;
+    height: 1px;
+    width: 1%;
+    background: $dark;
+    border: 1px solid $dark;
+    border-radius: 6px;
+    opacity: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    opacity: 1;
   }
 }
