@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 
 import s from './heading.module.scss';
 
@@ -14,11 +15,12 @@ export enum HeadingSize {
 
 interface HeadingProps {
   size: HeadingSize;
+  className?: string;
 }
 
-const Heading: React.FC<HeadingProps> = ({ children, size }) => {
+const Heading: React.FC<HeadingProps> = ({ children, size, className = null }) => {
   const Tag = size as keyof JSX.IntrinsicElements;
-  return <Tag className={s[size]}>{children}</Tag>;
+  return <Tag className={cn(s.default, s[size], className)}>{children}</Tag>;
 };
 
 export default Heading;

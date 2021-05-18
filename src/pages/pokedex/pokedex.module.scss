@@ -1,0 +1,24 @@
+@import '../../_variables.scss';
+
+.root {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #ffffff 30.32%, #f5f5f5 100%);
+
+  position: relative;
+}
+
+.pageHeader {
+  padding: 73px 0;
+  text-align: center;
+}
+
+.pokemonGallery {
+  max-width: 1125px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.pokemonCardPreview {
+  margin: 0 12px;
+}
