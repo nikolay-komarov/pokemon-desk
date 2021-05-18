@@ -1,4 +1,5 @@
 import React from 'react';
+import { navigate } from 'hookrouter';
 
 import Header from '../../components/header';
 import Layout from '../../components/layout';
@@ -7,6 +8,8 @@ import Parallax from '../../components/parallax';
 import Heading, { HeadingSize } from '../../components/heading';
 
 import s from './home.module.scss';
+
+import { LinkEnum } from '../../routes';
 
 const HomePage = () => (
   <div className={s.root}>
@@ -23,7 +26,7 @@ const HomePage = () => (
           size={ButtonSize.medium}
           color={ButtonColor.green}
           isFullWidth={false}
-          onClick={() => console.log('click')}>
+          onClick={() => navigate(LinkEnum.POKEDEX)}>
           See Pokemons
         </Button>
       </div>

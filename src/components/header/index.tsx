@@ -3,15 +3,12 @@ import { A, usePath } from 'hookrouter';
 import cn from 'classnames';
 
 import s from './header.module.scss';
-
 import { ReactComponent as LogoSVG } from './assets/logoPokemon.svg';
 
 import { GENERAL_MENU } from '../../routes';
 
 const Header = () => {
   const path = usePath();
-
-  console.log('### route: ', path);
 
   return (
     <div className={s.root}>

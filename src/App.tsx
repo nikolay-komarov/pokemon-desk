@@ -2,12 +2,14 @@ import React from 'react';
 import { useRoutes } from 'hookrouter';
 
 import routes from './routes';
+import NotFoundPage from './pages/not-found';
 
-const App = () => {
-  const match = useRoutes(routes);
-  console.log(match);
+const App = () => useRoutes(routes) || <NotFoundPage />;
 
-  return match;
-};
+// {
+//   // const match = useRoutes(routes);
+//
+//   return useRoutes(routes) || <NotFoundPage />;
+// };
 
 export default App;
