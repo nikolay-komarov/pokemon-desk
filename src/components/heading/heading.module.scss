@@ -1,3 +1,8 @@
+.default {
+  margin: 0;
+  padding: 0;
+}
+
 .h1 {
   font-size: 72px;
   font-weight: normal;
@@ -14,6 +19,7 @@
   font-size: 36px;
   font-weight: normal;
   font-style: normal;
+  line-height: 42px;
 }
 
 .h4 {
@@ -34,7 +40,7 @@
   font-style: normal;
 }
 
-.paragraph {
+.p {
   font-size: 16px;
   font-weight: normal;
   font-style: normal;
