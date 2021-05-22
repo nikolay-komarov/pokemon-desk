@@ -8,24 +8,41 @@ import s from './pokedex.module.scss';
 
 import {IPokemon} from '../../interfaces/pokemon';
 
-const PokedexPage = () => {
-  const [totalPokemons, setTotalPokemons] = useState(0);
-  const [pokemons, setPokemons] = useState([]);
+const usePokemons = () => {
+  const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
+    const getPokemons = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch('http://zar.hosthot.ru/api/v1/pokemons');
+        const result = await response.json();
 
-    fetch('http://zar.hosthot.ru/api/v1/pokemons')
-      .then(res => res.json())
-      .then(data => {
-        setTotalPokemons(data.total);
-        setPokemons(data.pokemons);
-      })
-      .catch(() => setIsError(true))
-      .finally(() => setIsLoading(false));
+        setData(data);
+      } catch (e) {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    getPokemons();
   }, []);
+
+  return {
+    data,
+    isLoading,
+    isError,
+  }
+}
+
+const PokedexPage = () => {
+  const {
+    data,
+    isLoading,
+    isError,
+  } = usePokemons();
 
   if (isLoading) {
     return <Heading size={HeadingSize.h4}>Loading...</Heading>
@@ -39,11 +56,11 @@ const PokedexPage = () => {
     <div className={s.root}>
       <Layout>
         <Heading size={HeadingSize.h3} className={s.pageHeader}>
-          {totalPokemons} <b>Pokemons</b> for you to choose your favorite
+          {data.total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
         <div className={s.pokemonGallery}>
           {
-            pokemons.map((item: IPokemon) => {
+            data.pokemons.map((item: IPokemon) => {
               return (
                 <div className={s.pokemonCardPreview} key={item.name}>
                   <PokemonCard stats={item.stats} types={item.types} img={item.img} name={item.name} />
