@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Layout from '../../components/layout';
-import Header from '../../components/header';
 import Heading, { HeadingSize } from '../../components/heading';
 import PokemonCard from '../../components/pokemon-card';
 
@@ -14,7 +13,6 @@ import pokemons from '../../mocks/pokemon';
 const PokedexPage = () => {
   return (
     <div className={s.root}>
-      <Header />
       <Layout>
         <Heading size={HeadingSize.h3} className={s.pageHeader}>
           800 <b>Pokemons</b> for you to choose your favorite
