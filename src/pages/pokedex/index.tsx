@@ -7,7 +7,7 @@ import PokemonCard from '../../components/pokemon-card';
 
 import s from './pokedex.module.scss';
 
-import { TypePokemon } from '../../interfaces/pokemon';
+import { IPokemon } from '../../interfaces/pokemon';
 
 import pokemons from '../../mocks/pokemon';
 
@@ -20,13 +20,15 @@ const PokedexPage = () => {
           800 <b>Pokemons</b> for you to choose your favorite
         </Heading>
         <div className={s.pokemonGallery}>
-          {pokemons.map((item: TypePokemon) => {
-            return (
-              <div className={s.pokemonCardPreview} key={item.name}>
-                <PokemonCard stats={item.stats} types={item.types} img={item.img} name={item.name} />
-              </div>
-            );
-          })}
+          {
+            pokemons.map((item: IPokemon) => {
+              return (
+                <div className={s.pokemonCardPreview} key={item.name}>
+                  <PokemonCard stats={item.stats} types={item.types} img={item.img} name={item.name} />
+                </div>
+              );
+            })
+          }
         </div>
       </Layout>
     </div>
