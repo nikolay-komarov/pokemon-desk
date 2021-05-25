@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 
 import Layout from '../../components/layout';
 import Heading, { HeadingSize } from '../../components/heading';
@@ -10,7 +10,18 @@ import { IPokemon } from '../../interfaces/pokemon';
 import useData from '../../hooks/getData';
 
 const PokedexPage = () => {
-  const { data, isLoading, isError } = useData('getPokemons');
+  const [searchValue, setSearchValue] = useState('');
+  const [query, setQuery] = useState({});
+
+  const { data, isLoading, isError } = useData('getPokemons', query, [searchValue]);
+
+  const handleSearchChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(evt.target.value);
+    setQuery((prevState) => ({
+      ...prevState,
+      name: evt.target.value,
+    }));
+  };
 
   if (isLoading) {
     return <Heading size={HeadingSize.h4}>Loading...</Heading>;
@@ -26,12 +37,15 @@ const PokedexPage = () => {
         <Heading size={HeadingSize.h3} className={s.pageHeader}>
           {
             // @ts-ignore
-            data && data.total
+            !isLoading && data.total
           }{' '}
           <b>Pokemons</b> for you to choose your favorite
         </Heading>
+
+        <input type="text" value={searchValue} onChange={handleSearchChange} />
+
         <div className={s.pokemonGallery}>
-          {data &&
+          {!isLoading &&
             // @ts-ignore
             data.pokemons.map((item: IPokemon) => {
               return (
