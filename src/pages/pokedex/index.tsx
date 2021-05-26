@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { A } from 'hookrouter';
 
 import Layout from '../../components/layout';
 import Heading, { HeadingSize } from '../../components/heading';
@@ -9,6 +10,7 @@ import s from './pokedex.module.scss';
 import { IPokemon, IPokemonsData } from '../../interfaces/pokemon';
 import useData from '../../hooks/getData';
 import useDebounce from '../../hooks/useDebounce';
+import { SECOND_ROUTES } from '../../routes';
 
 interface IQuery {
   name?: string;
@@ -45,7 +47,13 @@ const PokedexPage = () => {
           {!isLoading && data && data.total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
 
-        <input type="text" value={searchValue} onChange={handleSearchChange} />
+        <input
+          className={s.searchInput}
+          type="text"
+          value={searchValue}
+          onChange={handleSearchChange}
+          placeholder="Encuentra tu pokémon..."
+        />
 
         <div className={s.pokemonGallery}>
           {!isLoading &&
@@ -53,7 +61,9 @@ const PokedexPage = () => {
             data.pokemons.map((item: IPokemon) => {
               return (
                 <div className={s.pokemonCardPreview} key={item.name}>
-                  <PokemonCard stats={item.stats} types={item.types} img={item.img} name={item.name} />
+                  <A href={SECOND_ROUTES[0].link.replace(':id', item.id.toString())}>
+                    <PokemonCard stats={item.stats} types={item.types} img={item.img} name={item.name} />
+                  </A>
                 </div>
               );
             })}
