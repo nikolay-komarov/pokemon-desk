@@ -5,6 +5,7 @@ interface CssExports {
   'pokemonCardPreview': string;
   'pokemonGallery': string;
   'root': string;
+  'searchInput': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

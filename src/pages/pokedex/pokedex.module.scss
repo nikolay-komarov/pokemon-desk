@@ -12,6 +12,19 @@
   text-align: center;
 }
 
+.searchInput {
+  width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 36px;
+  padding: 16px 31px;
+  text-align: left;
+  background: #f2f2f2;
+  box-shadow: 4px 4px 16px rgba(1, 28, 64, 0.2);
+  border-radius: 40px;
+  border: none;
+}
+
 .pokemonGallery {
   max-width: 1125px;
   display: flex;
