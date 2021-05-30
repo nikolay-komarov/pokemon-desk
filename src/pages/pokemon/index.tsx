@@ -1,13 +1,19 @@
 import React from 'react';
+import useData from '../../hooks/getData';
+import { IPokemon } from '../../interfaces/pokemon';
 
 export interface PokemonProps {
   id: string | number;
 }
 
 const PokemonPage: React.FC<PokemonProps> = ({ id }) => {
-  // todo: add useData('getPokemon') by id
+  const { data, isLoading } = useData<IPokemon>('getPokemon', { id });
 
-  return <div>This is pokemon id equal to {id}</div>;
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return <div>This is pokemon id equal to {data?.name}</div>;
 };
 
 export default PokemonPage;
