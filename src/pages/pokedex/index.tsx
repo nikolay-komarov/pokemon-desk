@@ -11,6 +11,7 @@ import { IPokemon, IPokemonsData } from '../../interfaces/pokemon';
 import useData from '../../hooks/getData';
 import useDebounce from '../../hooks/useDebounce';
 import { SECOND_ROUTES } from '../../routes';
+import { toCapitalizeFirstLetter } from '../../utils/utils';
 
 interface IQuery {
   name?: string;
@@ -62,7 +63,12 @@ const PokedexPage = () => {
               return (
                 <div className={s.pokemonCardPreview} key={item.name}>
                   <A href={SECOND_ROUTES[0].link.replace(':id', item.id.toString())}>
-                    <PokemonCard stats={item.stats} types={item.types} img={item.img} name={item.name} />
+                    <PokemonCard
+                      stats={item.stats}
+                      types={item.types}
+                      img={item.img}
+                      name={toCapitalizeFirstLetter(item.name)}
+                    />
                   </A>
                 </div>
               );
