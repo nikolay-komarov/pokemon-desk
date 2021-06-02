@@ -1,6 +1,8 @@
-'use strict';
-
-const Hapi = require('@hapi/hapi');
+import Hapi from '@hapi/hapi';
+import React from 'react';
+import ReactDOM from 'react-dom/server';
+import { setPath } from 'hookrouter';
+import App from '../App';
 
 const init = async () => {
   const server = Hapi.server({
@@ -12,7 +14,9 @@ const init = async () => {
     method: 'GET',
     path: '/{any*}',
     handler: (request, h) => {
-      return `Hello World! This is page ${request.path}`;
+      setPath(request.path);
+      const result = ReactDOM.renderToString(<App />);
+      return result;
     },
   });
 
