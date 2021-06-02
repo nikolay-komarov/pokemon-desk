@@ -1,4 +1,8 @@
+import fs from 'fs';
+import path from 'path';
+
 import Hapi from '@hapi/hapi';
+import handlebars from 'handlebars';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import { setPath } from 'hookrouter';
@@ -10,13 +14,27 @@ const init = async () => {
     host: 'localhost',
   });
 
+  // eslint-disable-next-line global-require
+  await server.register(require('@hapi/inert'));
+
+  server.route({
+    method: 'GET',
+    path: '/main.js',
+    handler: (request, h) => h.file(path.join(process.cwd(), 'dist', 'main.js')),
+  });
+
   server.route({
     method: 'GET',
     path: '/{any*}',
     handler: (request, h) => {
       setPath(request.path);
+      const pathIndexHTML = path.join(process.cwd(), 'dist', 'index.html');
+      const template = handlebars.compile(fs.readFileSync(pathIndexHTML, 'utf8'));
       const result = ReactDOM.renderToString(<App />);
-      return result;
+      const page = template({
+        content: result,
+      });
+      return page;
     },
   });
 
