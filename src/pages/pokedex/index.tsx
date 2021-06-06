@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { A } from 'hookrouter';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Layout from '../../components/layout';
 import Heading, { HeadingSize } from '../../components/heading';
@@ -12,18 +13,41 @@ import useData from '../../hooks/getData';
 import useDebounce from '../../hooks/useDebounce';
 import { SECOND_ROUTES } from '../../routes';
 import { toCapitalizeFirstLetter } from '../../utils/utils';
+import {
+  getPokemonsAction,
+  getPokemonsData,
+  getPokemonsDataLoading,
+  getPokemonsLoading,
+  getPokemonsTotalData,
+  getPokemonsType,
+  getTypesAction,
+} from '../../store/pokemons';
 
 interface IQuery {
   name?: string;
 }
 
 const PokedexPage = () => {
+  const dispatch = useDispatch();
+  const types = useSelector(getPokemonsType);
+  const isTypesLoading = useSelector(getPokemonsLoading);
   const [searchValue, setSearchValue] = useState('');
   const [query, setQuery] = useState<IQuery>({});
 
   const debouncedValue = useDebounce(searchValue, 500);
 
-  const { data, isLoading, isError } = useData<IPokemonsData>('getPokemons', query, [debouncedValue]);
+  // const { data, isLoading, isError } = useData<IPokemonsData>('getPokemons', query, [debouncedValue]);
+
+  const data = useSelector(getPokemonsData);
+  const total = useSelector(getPokemonsTotalData);
+  const isLoading = useSelector(getPokemonsDataLoading);
+
+  console.log('### in pokedex total: ', total);
+
+  useEffect(() => {
+    dispatch(getTypesAction());
+    dispatch(getPokemonsAction());
+  }, []);
 
   const handleSearchChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(evt.target.value);
@@ -37,15 +61,11 @@ const PokedexPage = () => {
     return <Heading size={HeadingSize.h4}>Loading...</Heading>;
   }
 
-  if (isError) {
-    return <Heading size={HeadingSize.h4}>Something wrong...</Heading>;
-  }
-
   return (
     <div className={s.root}>
       <Layout>
         <Heading size={HeadingSize.h3} className={s.pageHeader}>
-          {!isLoading && data && data.total} <b>Pokemons</b> for you to choose your favorite
+          {total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
 
         <input
@@ -56,10 +76,12 @@ const PokedexPage = () => {
           placeholder="Encuentra tu pokémon..."
         />
 
+        <div>{isTypesLoading ? <p>TypeLoading...</p> : types?.map((type) => <p key={type}>{type}</p>)}</div>
+
         <div className={s.pokemonGallery}>
           {!isLoading &&
             data &&
-            data.pokemons.map((item: IPokemon) => {
+            data.map((item: IPokemon) => {
               return (
                 <div className={s.pokemonCardPreview} key={item.name}>
                   <A href={SECOND_ROUTES[0].link.replace(':id', item.id.toString())}>
