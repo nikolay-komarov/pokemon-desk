@@ -2,6 +2,8 @@ import { Dispatch } from 'react';
 import { IPokemonTypes } from '../interfaces/pokemon';
 
 import req from '../utils/request';
+import { IStateRequest } from '../interfaces';
+import { IInitialState } from './index';
 
 export enum PokemonsActionTypes {
   FETCH_TYPES = 'FETCH_TYPES',
@@ -16,8 +18,12 @@ interface TypesAction {
 
 type ActionTypes = TypesAction;
 
-const initialState = {
-  types: {
+export interface IPokemonsInitialState {
+  type: IStateRequest<string>;
+}
+
+const initialState: IPokemonsInitialState = {
+  type: {
     isLoading: false,
     data: null,
     error: null,
@@ -57,6 +63,9 @@ const pokemons = (state = initialState, action: ActionTypes) => {
       return state;
   }
 };
+
+export const getPokemonsType = (state: IInitialState) => state.pokemons.type.data;
+export const getPokemonsLoading = (state: IInitialState) => state.pokemons.type.isLoading;
 
 export const getTypesAction = () => {
   return async (dispatch: Dispatch<ActionTypes>) => {

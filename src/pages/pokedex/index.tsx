@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { A } from 'hookrouter';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Layout from '../../components/layout';
 import Heading, { HeadingSize } from '../../components/heading';
@@ -13,7 +13,7 @@ import useData from '../../hooks/getData';
 import useDebounce from '../../hooks/useDebounce';
 import { SECOND_ROUTES } from '../../routes';
 import { toCapitalizeFirstLetter } from '../../utils/utils';
-import { getTypesAction } from '../../store/pokemons';
+import { getPokemonsLoading, getPokemonsType, getTypesAction } from '../../store/pokemons';
 
 interface IQuery {
   name?: string;
@@ -21,6 +21,8 @@ interface IQuery {
 
 const PokedexPage = () => {
   const dispatch = useDispatch();
+  const types = useSelector(getPokemonsType);
+  const isTypesLoading = useSelector(getPokemonsLoading);
   const [searchValue, setSearchValue] = useState('');
   const [query, setQuery] = useState<IQuery>({});
 
@@ -62,6 +64,8 @@ const PokedexPage = () => {
           onChange={handleSearchChange}
           placeholder="Encuentra tu pokémon..."
         />
+
+        <div>{isTypesLoading ? <p>TypeLoading...</p> : types?.map((type) => <p key={type}>{type}</p>)}</div>
 
         <div className={s.pokemonGallery}>
           {!isLoading &&
