@@ -4,8 +4,6 @@ import createRootReducer from './store';
 
 const enhancers: [] = [];
 
-console.log('###mode: ', process.env.NODE_ENV);
-
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtension = (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
